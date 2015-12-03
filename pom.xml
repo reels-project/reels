@@ -6,6 +6,7 @@
   <packaging>pom</packaging>
   <modules>
   	<module>reels-core</module>
+  	<module>reels-faces</module>
   </modules>
   <organization>
     <name>Reels Project</name>
