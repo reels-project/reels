@@ -9,11 +9,8 @@
   <tag>
     <tag-name>convertOptionalString</tag-name>
     <converter>
-      <converter-id>com.github.reels_project.reels.faces.convert.BigDecimalConverter</converter-id>
+      <converter-id>com.github.reels_project.reels.faces.convert.OptionalStringConverter</converter-id>
     </converter>
-    <attribute>
-      <name>optional</name>
-    </attribute>
   </tag>
   
   <tag>
