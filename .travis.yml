@@ -5,6 +5,9 @@ jdk:
 cache:
   directories:
     - $HOME/.m2
-    
+
+after_success:
+  mvn -DrepoToken=gBKhbAdlojZI6BO0LvD85MP2yuYecf53h clean test jacoco:report coveralls:report
+
 notifications:
   slack: mosa:9YCxwA9rYFDft8MFphZqMqG2
