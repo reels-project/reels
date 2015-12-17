@@ -1,4 +1,4 @@
-package com.github.reels_project.reels.faces.view;
+package com.github.reels_project.reels.faces.controller;
 
 import java.util.HashMap;
 import java.util.Map;

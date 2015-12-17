@@ -1,8 +1,8 @@
-package com.github.reels_project.reels.faces.view.module;
+package com.github.reels_project.reels.faces.controller.module;
 
 import java.util.Objects;
 
-import com.github.reels_project.reels.faces.view.Navigation;
+import com.github.reels_project.reels.faces.controller.Navigation;
 
 public interface Rendering {
 	

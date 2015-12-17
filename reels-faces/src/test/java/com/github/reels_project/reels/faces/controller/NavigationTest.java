@@ -1,8 +1,10 @@
-package com.github.reels_project.reels.faces.view;
+package com.github.reels_project.reels.faces.controller;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 import org.junit.Test;
+
+import com.github.reels_project.reels.faces.controller.Navigation;
 
 
 public class NavigationTest {
