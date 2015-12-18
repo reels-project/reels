@@ -1,4 +1,4 @@
-package com.github.reels_project.reels.faces.view.module;
+package com.github.reels_project.reels.faces.controller.module;
 
 import java.io.IOException;
 import java.io.InputStream;

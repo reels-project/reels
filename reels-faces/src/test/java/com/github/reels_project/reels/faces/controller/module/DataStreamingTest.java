@@ -1,4 +1,4 @@
-package com.github.reels_project.reels.faces.view.module;
+package com.github.reels_project.reels.faces.controller.module;
 
 import static org.junit.Assert.*;
 
@@ -16,6 +16,8 @@ import java.io.ByteArrayInputStream;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+
+import com.github.reels_project.reels.faces.controller.module.DataStreaming;
 
 public class DataStreamingTest {
 	
