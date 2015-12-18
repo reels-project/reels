@@ -12,7 +12,7 @@ import javax.faces.event.ActionListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.reels_project.reels.faces.view.Navigation;
+import com.github.reels_project.reels.faces.controller.Navigation;
 
 public class ReelsActionListener implements ActionListener{
 	
