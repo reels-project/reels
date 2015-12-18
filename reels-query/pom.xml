@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.github.reels_project</groupId>
     <artifactId>reels</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${reels.version}</version>
   </parent>
   <artifactId>reels-query</artifactId>
   
@@ -21,6 +21,11 @@
       <artifactId>h2</artifactId>
       <version>1.4.186</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>com.github.reels_project</groupId>
+    	<artifactId>reels-core</artifactId>
+    	<version>${reels.version}</version>
     </dependency>
   </dependencies>
 </project>

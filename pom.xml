@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.reels_project</groupId>
   <artifactId>reels</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>${reels.version}</version>
   <packaging>pom</packaging>
   
   <modules>
@@ -60,6 +60,7 @@
   </ciManagement>
   
   <properties>
+    <reels.version>0.0.1-SNAPSHOT</reels.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   
