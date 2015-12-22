@@ -7,5 +7,6 @@
     version="2.1">
     <application>
       <action-listener>com.github.reels_project.reels.faces.application.ReelsActionListener</action-listener>
+      <view-handler>com.github.reels_project.reels.faces.router.ReelsViewHandler</view-handler>
     </application>
 </faces-config>
