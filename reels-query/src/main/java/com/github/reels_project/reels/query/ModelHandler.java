@@ -17,8 +17,11 @@ import com.github.reels_project.reels.query.util.Tuple;
 
 /**
  * TODO v0.x.x バッチ用インスタンスを作成するファクトリメソッドを追加する？
+ * @deprecated 基本的な機能は{@link EntityBase}に移動
+ * @see EntityBase
  * @author Takahiko Sato(MOSA architect Inc.)
  */
+@Deprecated
 public class ModelHandler<T>{
 	
 	private static Logger logger = LoggerFactory.getLogger(ModelHandler.class);
