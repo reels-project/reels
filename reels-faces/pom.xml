@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.github.reels_project</groupId>
     <artifactId>reels</artifactId>
-    <version>${reels.version}</version>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>reels-faces</artifactId>
   <dependencies>
@@ -18,7 +18,7 @@
     <dependency>
     	<groupId>com.github.reels_project</groupId>
     	<artifactId>reels-core</artifactId>
-    	<version>${reels.version}</version>
+    	<version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>
