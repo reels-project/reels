@@ -25,6 +25,6 @@ JSFの対象としてFacesServletに認識させるために`/faces/*`や`*.xhtm
 
 Reelsではルーター機能を追加して、ユーザーフレンドリーなURLとファイルの置き場所の自由を提供します。
 
-##How to import to exlipse?
+##How to import to eclipse?
 File > Import > Maven > Existing Maven Projects
 
