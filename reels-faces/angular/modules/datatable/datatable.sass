@@ -1,0 +1,76 @@
+.noz-datatable
+  width: 100%
+  display: flex
+  flex-direction: column
+  flex-grow: 1
+  .datatable-container
+    .data-table
+      // height: 100%
+      // width: 100%
+      border: none
+      border-collapse: collapse
+      box-sizing: border-box
+      .checkbox-delete
+        margin: 0 10px
+      .data-th, .data-td
+        border: none
+        padding: 10px 5px
+        // display: table-cell
+        text-align: left
+        vertical-align: middle
+        justify-content: center
+      .data-th-content
+        justify-content: center
+        text-align: left
+        vertical-align: middle
+      .data-th
+        height: 54px
+        cursor: pointer
+      .data-td
+        height: 41px
+      .data-tr
+        border-bottom: 1px solid #d0d0d0
+        display: flex
+        flex-direction: row
+      .data-thead
+        width: 100%
+      .data-tbody
+        width: 100%
+        .data-tr.ng-leave
+          display: none
+          text-align: center
+        // tr:hover:not(.btn-ink):not(.btn-flat):not(.btn-fab)
+        // 	 background-color: rgba(0, 0, 0, 0.1)
+        .tr-hovered
+          background-color: rgba(0, 0, 0, 0.1)
+          transition: background-color 0.2s ease, box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1)
+        .tr-selected
+          background-color: rgba(0, 0, 0, 0.2)
+          transition: background-color 0.2s ease, box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1)
+        .td-summary, .td-template
+          vertical-align: middle
+          word-break: break-all
+        .td-detail
+          background-color: rgba(0,0,0,0.04)
+          font-size: 16px!important
+          padding: 10px 0
+    .datatable-fixed-body-container
+      overflow-y: hidden
+    .datatable-flow-body-container
+      overflow-y: auto
+      overflow-x: hidden
+    .datatable-flow
+      overflow-x: auto
+    .datatable-fixed
+      border-right: 1px solid #d0d0d0
+    .icon-fixed,.icon-sort
+      color: #1265A7
+    .icon-fixed
+      transform: rotate(-45deg)
+    .btn-option
+      padding: 3px 12px
+      margin: -5px 0
+    .td-edit
+      width: 65px
+    .td-delete
+      width: 65px

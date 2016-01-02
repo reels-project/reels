@@ -157,4 +157,80 @@
       <name>format</name>
     </attribute>
   </tag>
+  
+  <composite-library-name>compo</composite-library-name>
+  <!-- component -->
+  <composite-library-name>component</composite-library-name>
+  
+  <!-- angularJs contianer (compiler) -->
+  <tag>
+    <tag-name>ngContainer</tag-name>
+    <component>
+        <component-type>com.github.reels_project.reels.faces.component.NgContainer</component-type>
+    </component>
+  </tag>
+  
+  <!-- datatable -->
+  <tag>
+    <tag-name>dataTable</tag-name>
+    <source>./resources/angular/datatable/datatable.xhtml</source>
+    <!-- <attribute>
+      <name>model</name>
+      <type>com.github.reels_project.reels.faces.model.datatable.DatatableModel</type>
+    </attribute> -->
+  </tag>
+  <tag>
+    <tag-name>thead</tag-name>
+    <source>./resources/angular/datatable/thead.xhtml</source>
+  </tag>
+  <tag>
+    <tag-name>tbody</tag-name>
+    <source>./resources/angular/datatable/tbody.xhtml</source>
+  </tag>
+  <tag>
+    <tag-name>tr</tag-name>
+    <source>./resources/angular/datatable/tr.xhtml</source>
+  </tag>
+  <tag>
+    <tag-name>th</tag-name>
+    <source>./resources/angular/datatable/th.xhtml</source>
+  </tag>
+  <tag>
+    <tag-name>td</tag-name>
+    <source>./resources/angular/datatable/td.xhtml</source>
+  </tag>
+  
+  <!-- chart -->
+  <tag>
+    <tag-name>chart</tag-name>
+    <source>./resources/angular/chart/chart.xhtml</source>
+  </tag>
+  
+  <!-- gantt -->
+  <tag>
+    <tag-name>gantt</tag-name>
+    <source>./resources/angular/gantt/gantt-chart.xhtml</source>
+  </tag>
+  
+  <!-- CmpornentModel Converters -->
+  <tag>
+    <tag-name>convertDatatableModel</tag-name>
+    <converter>
+      <converter-id>com.github.reels_project.reels.faces.model.datatable.DatatableModelConverter</converter-id>
+    </converter>
+  </tag>
+  
+  <tag>
+    <tag-name>convertGanttModel</tag-name>
+    <converter>
+      <converter-id>com.github.reels_project.reels.faces.model.gantt.GanttModelConverter</converter-id>
+    </converter>
+  </tag>
+  
+  <tag>
+    <tag-name>convertChartModel</tag-name>
+    <converter>
+      <converter-id>com.github.reels_project.reels.faces.model.chart.ChartModelConverter</converter-id>
+    </converter>
+  </tag>
 </facelet-taglib>
