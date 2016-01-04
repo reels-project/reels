@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/reels-project/reels.png?label=ready&title=Ready)](https://waffle.io/reels-project/reels)
 # Reels Framework
 
 [![Build Status](https://travis-ci.org/reels-project/reels.svg)](https://travis-ci.org/reels-project/reels)
