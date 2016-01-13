@@ -16,8 +16,9 @@ public class Datatable extends UIInput{
 
 	public DatatableModel getModel() {
 		return (DatatableModel) getStateHelper().eval("model", null);
+		
 	}
-
+	
 	public void setModel(DatatableModel value) {
 		getStateHelper().put("model", value);
 	}

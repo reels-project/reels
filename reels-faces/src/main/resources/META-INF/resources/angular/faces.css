@@ -1,6 +1,9 @@
 .txt-bean-bind {
   display: none; }
 
+jsf-datatable, jsf-thead, jsf-tbody, jsf-tr, jsf-th, jsf-td {
+  display: block; }
+
 /*-- Chart --*/
 .c3 svg {
   font: 10px sans-serif; }

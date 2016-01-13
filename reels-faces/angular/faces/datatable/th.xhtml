@@ -6,15 +6,13 @@
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:r="https://github.com/reels-project/reels/faces">
 
-    <!-- <div class="noz-th"/> -->
-    <div>
-	  <cc:th>
+    <!-- <div> -->
+	  <cc:th fixed="#{fixed}">
 	    <ui:insert/>
 	  </cc:th>
-	  <h:inputText class="txt-bean-bind txt-th-active" value="#{active}">
+	  <!-- <h:inputText class="txt-bean-bind txt-th-fixed">
 	    <f:ajax event="click"/>
-	    <r:convertBoolean/>
-	  </h:inputText>
-    </div>
+	  </h:inputText> -->
+    <!-- </div> -->
 
 </ui:composition>

@@ -10,7 +10,6 @@ var GanttChart = (function () {
         this.headers = ['year', 'month', 'day'];
         this.headersFormats = { year: 'YYYY', month: 'MM' };
         this.tableColumns = ['model.name'];
-        console.log(this.data);
         this.api = function (api) {
             api.tasks.on.change(_this.scope, function (d) {
                 _this.jsonStr = JSON.stringify(_this.data);

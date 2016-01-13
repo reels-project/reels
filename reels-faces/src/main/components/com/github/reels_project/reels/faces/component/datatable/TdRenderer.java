@@ -21,15 +21,14 @@ public class TdRenderer extends DirectiveRenderer {
 	@Override
 	public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
 		ResponseWriter writer = context.getResponseWriter();
-		writer.endElement("div");
+		writer.endElement("jsf-td");
 //		super.encodeScript(context, component);
 	}
 
 	protected void encodeMarkup(FacesContext context, UIComponent component) throws IOException {
 		ResponseWriter writer = context.getResponseWriter();
 		
-		writer.startElement("div", null);
+		writer.startElement("jsf-td", null);
 		writer.writeAttribute("id", component.getClientId(), null);
-		writer.writeAttribute("class", "jsf-td", null);
 	}
 }

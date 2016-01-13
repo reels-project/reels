@@ -1,11 +1,22 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:cc="http://xmlns.jcp.org/jsf/component"
-                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:r="https://github.com/reels-project/reels/faces">
 
-    <!-- <div class="noz-tbody"/> -->
-    <cc:tbody>
-      <ui:insert/>
+<div>
+    <!-- <div class="mosa-tbody"/> -->
+    <cc:tbody value="#{value}" sortable="#{sortable}">
+      <!-- <ui:repeat var="model" value="#{value}"> -->
+        <ui:insert/>
+      <!-- </ui:repeat> -->
     </cc:tbody>
+    <!-- <h:inputText class="txt-bean-bind txt-tbody-value" value="#{value}">
+      <f:ajax event="click"/>
+      <r:convertArrayList/>
+    </h:inputText> -->
+</div>
 
 </ui:composition>

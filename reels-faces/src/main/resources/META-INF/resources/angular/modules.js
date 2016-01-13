@@ -58,6 +58,11 @@ var Datatable = (function () {
         this.scope.$broadcast;
         this.setDetaults();
         this.configureWatchers();
+        this.scope.$on('fixedColumn', function (e, fixed) {
+            console.log('fixedColumn!!');
+            console.log(e);
+            console.log(fixed);
+        });
     }
     Datatable.prototype.getElementsByClass = function (classVal) {
         return angular.element(this.element[0].getElementsByClassName(classVal));
@@ -210,13 +215,13 @@ var Datatable = (function () {
     return Datatable;
 })();
 app.filter('datatableFixedFilter', FixedFilter);
-app.directive('nozDatatable', function () {
+app.directive('mosaDatatable', function () {
     var iconClass = "glyphicon";
     var fixedIcon = iconClass + " glyphicon-pushpin";
-    var datatableTmplate = "\n    <div layout=\"row\"\n         flex\n         class=\"datatable-container\">\n         <div>\n           <noz-table>\n           </noz-table>\n         </div>\n         <noz-table flex>\n           <div ng-transclude layout=\"column\" flex></div>\n         </noz-table>\n    </div>";
+    var datatableTmplate = "\n    <div layout=\"row\"\n         flex\n         ng-cloak\n         class=\"datatable-container\">\n\n         <div>\n           <mosa-table>\n             <mosa-thead>\n             </mosa-thead>\n             <mosa-tbody>\n             </mosa-tbody>\n           </mosa-table>\n         </div>\n\n         <mosa-table class=\"datatable-flow\" flex>\n           <div ng-transclude layout=\"column\" flex></div>\n         </mosa-table>\n    </div>";
     return {
         template: datatableTmplate,
-        restrict: 'EAC',
+        restrict: 'EA',
         scope: {},
         controller: Datatable,
         controllerAs: 'datatable',
@@ -239,10 +244,10 @@ var Table = (function () {
     Table.$inject = ['$scope', '$element', '$timeout'];
     return Table;
 })();
-app.directive('nozTable', function () {
+app.directive('mosaTable', function () {
     return {
-        template: '<div class="data-table" ng-transclude layout="column" flex></div>',
-        restrict: 'EAC',
+        template: '<div class="mosa-table" ng-transclude layout="column" flex></div>',
+        restrict: 'EA',
         scope: {},
         controller: Table,
         controllerAs: 'table',
@@ -260,10 +265,10 @@ var Thead = (function () {
     Thead.$inject = ['$scope', '$element', '$timeout'];
     return Thead;
 })();
-app.directive('nozThead', function () {
+app.directive('mosaThead', function () {
     return {
-        template: '<div class="data-thead" ng-transclude></div>',
-        restrict: 'EAC',
+        template: '<div class="mosa-thead" ng-transclude></div>',
+        restrict: 'EA',
         scope: {},
         controller: Thead,
         controllerAs: 'thead',
@@ -281,10 +286,10 @@ var Tbody = (function () {
     Tbody.$inject = ['$scope', '$element', '$timeout'];
     return Tbody;
 })();
-app.directive('nozTbody', function () {
+app.directive('mosaTbody', function () {
     return {
-        template: "<div layout=\"column\" flex class=\"datatable-flow-body-container\">\n                     <div class=\"data-tbody\" ng-transclude></div>\n                   </div>",
-        restrict: 'EAC',
+        template: "<div layout=\"column\" flex class=\"datatable-flow-body-container\">\n                     <div class=\"mosa-tbody\" ng-transclude></div>\n                   </div>",
+        restrict: 'EA',
         scope: {},
         controller: Tbody,
         controllerAs: 'tbody',
@@ -302,10 +307,10 @@ var Tr = (function () {
     Tr.$inject = ['$scope', '$element', '$timeout'];
     return Tr;
 })();
-app.directive('nozTr', function () {
+app.directive('mosaTr', function () {
     return {
-        template: '<div class="data-tr" ng-transclude></div>',
-        restrict: 'EAC',
+        template: '<div class="mosa-tr" ng-transclude></div>',
+        restrict: 'EA',
         scope: {},
         controller: Tr,
         controllerAs: 'tr',
@@ -319,28 +324,30 @@ var Th = (function () {
         this.scope = scope;
         this.element = element;
         this.timeout = timeout;
+        if (this.fixed) {
+            this.fixedColumn(this.fixed);
+        }
     }
     Th.prototype.sort = function () {
         this.scope.$emit('sort');
     };
-    Th.prototype.getColor = function () {
-        var color = this.active ? 'red' : 'black';
-        return color;
+    Th.prototype.fixedColumn = function (fixed) {
+        this.scope.$emit('fixedColumn', fixed);
     };
     Th.$inject = ['$scope', '$element', '$timeout'];
     return Th;
 })();
-app.directive('nozTh', function () {
+app.directive('mosaTh', function () {
     return {
-        template: "<div class=\"data-th\" layout=\"row\" ng-click=\"th.sort()\">\n                     <div class=\"data-th-content\" layout=\"column\" ng-transclude>\n                     </div>\n                   </div>",
-        restrict: 'EAC',
+        template: "<div class=\"mosa-th\" layout=\"row\" ng-click=\"th.sort()\">\n                     <div class=\"mosa-th-content\" layout=\"column\" ng-transclude>\n                     </div>\n                   </div>",
+        restrict: 'EA',
         scope: {},
         controller: Th,
         controllerAs: 'th',
         transclude: true,
         replace: true,
         bindToController: {
-            active: '='
+            fixed: '='
         }
     };
 });
@@ -353,10 +360,10 @@ var Td = (function () {
     Td.$inject = ['$scope', '$element', '$timeout'];
     return Td;
 })();
-app.directive('nozTd', function () {
+app.directive('mosaTd', function () {
     return {
-        template: '<div class="data-td" ng-transclude></div>',
-        restrict: 'EAC',
+        template: '<div class="mosa-td" ng-transclude></div>',
+        restrict: 'EA',
         scope: {},
         controller: Td,
         controllerAs: 'td',
@@ -366,11 +373,286 @@ app.directive('nozTd', function () {
     };
 });
 
-},{"angular":4}],2:[function(require,module,exports){
+},{"angular":7}],2:[function(require,module,exports){
+var app = angular.module('mosaModules');
+var Draggable = (function () {
+    function Draggable() {
+    }
+    return Draggable;
+})();
+app.directive('draggable', function () {
+    return {
+        restrict: 'A',
+        scope: false,
+        controller: Draggable,
+        controllerAs: 'draggable',
+        bindToController: true
+    };
+});
+var eventList = [
+    { name: 'dragstart', fn: function (e) { e.dataTransfer.dropEffect = 'none'; } },
+    { name: 'drag', fn: function (e) { } },
+    { name: 'dragenter', fn: function (e) { } },
+    { name: 'dragleave', fn: function (e) { } },
+    { name: 'dragend', fn: function (e) { } }];
+eventList.forEach(function (v) {
+    app.directive(v.name, ['$parse', '$rootScope', function ($parse, $rootScope) {
+            return {
+                restrict: 'A',
+                compile: function ($element, attr) {
+                    var fn = $parse(attr[v.name], null, true);
+                    return function (scope, element) {
+                        element.on(v.name, function (event) {
+                            if (scope.$eval(attr['draggable'])) {
+                                var callback = function () {
+                                    v.fn(event);
+                                    fn(scope, { $event: event });
+                                };
+                                if ($rootScope.$$phase) {
+                                    scope.$evalAsync(callback);
+                                }
+                                else {
+                                    scope.$apply(callback);
+                                }
+                            }
+                        });
+                    };
+                }
+            };
+        }]);
+});
+
+},{}],3:[function(require,module,exports){
+var app = angular.module('mosaModules');
+var Droppable = (function () {
+    function Droppable(element) {
+        this.element = element;
+        this.element.on('dragover', function (e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'none';
+        });
+    }
+    Droppable.$inject = ['$element'];
+    return Droppable;
+})();
+app.directive('droppable', function () {
+    return {
+        restrict: 'A',
+        scope: false,
+        controller: Droppable,
+        controllerAs: 'droppable',
+        bindToController: true
+    };
+});
+var eventList = [
+    { name: 'drop', fn: function (e) { } }];
+eventList.forEach(function (v) {
+    app.directive(v.name, ['$parse', '$rootScope', function ($parse, $rootScope) {
+            return {
+                restrict: 'A',
+                compile: function ($element, attr) {
+                    var fn = $parse(attr[v.name], null, true);
+                    return function (scope, element) {
+                        element.on(v.name, function (event) {
+                            if (scope.$eval(attr['droppable'])) {
+                                var callback = function () {
+                                    v.fn(event);
+                                    fn(scope, { $event: event });
+                                };
+                                if ($rootScope.$$phase) {
+                                    scope.$evalAsync(callback);
+                                }
+                                else {
+                                    scope.$apply(callback);
+                                }
+                            }
+                        });
+                    };
+                }
+            };
+        }]);
+});
+
+},{}],4:[function(require,module,exports){
 var app = angular.module('mosaModules', []);
 require('./datatable/datatable');
+require('./dnd/draggable');
+require('./dnd/droppable');
+require('./sortable/sortable');
 
-},{"./datatable/datatable":1}],3:[function(require,module,exports){
+},{"./datatable/datatable":1,"./dnd/draggable":2,"./dnd/droppable":3,"./sortable/sortable":5}],5:[function(require,module,exports){
+var app = angular.module('mosaModules');
+var sortable = (function () {
+    function sortable(scope, element, attrs, parse, timeout) {
+        this.scope = scope;
+        this.element = element;
+        this.attrs = attrs;
+        this.parse = parse;
+        this.timeout = timeout;
+        this.DRAG_START = 'dragstart';
+        this.DRAG_OVER = 'dragover';
+        this.DRAG_ENTER = 'dragenter';
+        this.DRAG_LEAVE = 'dragleave';
+        this.DROP = 'drop';
+        this.DRAG_END = 'dragend';
+        this.trList = [];
+        this.setDetaults();
+        this.configureWatchers();
+        this.bindEvents();
+    }
+    sortable.prototype.enabled = function () {
+        var fnSortable = this.parse(this.attrs['mosaSortable']);
+        return fnSortable ? fnSortable(this.scope) : false;
+    };
+    sortable.prototype.setDetaults = function () {
+    };
+    sortable.prototype.configureWatchers = function () {
+        var _this = this;
+        if (!this.enabled())
+            return;
+        this.element.on('DOMSubtreeModified', function (e) {
+            var trList = angular.element(_this.element.children());
+            trList.off([_this.DRAG_START, _this.DRAG_OVER, _this.DRAG_ENTER, _this.DRAG_LEAVE, _this.DROP, _this.DRAG_END].join(' '));
+            trList.attr('draggable', 'true');
+            trList.attr('droppable', 'true');
+            trList.on(_this.DRAG_START, function (e) { _this.dragStart(e); });
+            trList.on(_this.DRAG_OVER, function (e) { _this.dragOver(e); });
+            trList.on(_this.DRAG_ENTER, function (e) { _this.dragEnter(e); });
+            trList.on(_this.DRAG_LEAVE, function (e) { _this.dragLeave(e); });
+            trList.on(_this.DROP, function (e) { _this.drop(e); });
+            trList.on(_this.DRAG_END, function (e) { _this.dragEnd(e); });
+            _this.trList.splice(0, _this.trList.length);
+            for (var i = 0; i < trList.length; i++) {
+                _this.trList.push(trList[i]);
+            }
+        });
+    };
+    sortable.prototype.bindEvents = function () {
+    };
+    sortable.prototype.ev = function (e) { return e.originalEvent; };
+    sortable.prototype.dragStart = function (e) {
+        var ev = this.ev(e);
+        this.callEvent(this.DRAG_START, ev);
+        var src = angular.element(ev.srcElement);
+        var rect = src[0].getBoundingClientRect();
+        this.srcIndex = this.trList.indexOf(src[0]);
+        this.dragStartIndex = this.srcIndex;
+        this.timeout(function () { src.css({ opacity: 0 }); });
+        var tr = angular.element(src[0].innerHTML);
+        tr.css({
+            width: rect.width,
+            height: rect.height
+        });
+        this.ghost = angular.element("<div class=\"sortable-drag-ghost depth-3\"></div>");
+        this.ghost.append(tr);
+        this.ghost.css({
+            width: rect.width,
+            height: rect.height,
+            top: src[0].clientTop,
+            left: src[0].clientLeft
+        });
+        this.element.parent().append(this.ghost[0]);
+        var di = new Image();
+        di.hidden = true;
+        di.src = "";
+        di.width = 0;
+        e.originalEvent.dataTransfer.setDragImage(di, 0, 0);
+    };
+    sortable.prototype.dragOver = function (e) {
+        var ev = this.ev(e);
+        this.callEvent(this.DRAG_OVER, ev);
+        ev.preventDefault();
+        if (this.ghost)
+            this.ghost.css({ top: ev.pageY - this.element[0].getBoundingClientRect().top });
+    };
+    sortable.prototype.dragEnter = function (e) {
+        var ev = this.ev(e);
+        this.callEvent(this.DRAG_ENTER, ev);
+        var tgt = this.getTgtTr(ev.toElement);
+        var toIndex = this.trList.indexOf(tgt[0]);
+        if (toIndex == this.srcIndex)
+            return;
+        if (toIndex >= this.srcIndex || this.dragStartIndex <= toIndex) {
+            this.swapElement(this.srcIndex, toIndex);
+            this.srcIndex = toIndex;
+        }
+        else if (toIndex <= this.srcIndex || this.dragStartIndex <= toIndex) {
+            this.swapElement(this.srcIndex, toIndex);
+            this.srcIndex = toIndex;
+        }
+    };
+    sortable.prototype.dragLeave = function (e) {
+        this.callEvent(this.DRAG_LEAVE, e);
+        var ev = this.ev(e);
+    };
+    sortable.prototype.drop = function (e) {
+        this.callEvent(this.DROP, e);
+        var ev = this.ev(e);
+    };
+    sortable.prototype.dragEnd = function (e) {
+        this.callEvent(this.DRAG_END, e);
+        this.callSortedEvent('sorted', { fromIndex: this.dragStartIndex }, { toIndex: this.srcIndex });
+        var ev = this.ev(e);
+        var src = angular.element(ev.srcElement);
+        src.css({ opacity: 1 });
+        if (this.ghost)
+            this.ghost[0].remove();
+    };
+    sortable.prototype.getTr = function (index) {
+        return this.element.children()[index];
+    };
+    sortable.prototype.getTgtTr = function (ele) {
+        var e = angular.element(ele);
+        if (this.element == e)
+            return null;
+        var tgt = e.parent();
+        return this.trList.indexOf(tgt[0]) > -1 ? tgt : this.getTgtTr(tgt[0]);
+    };
+    sortable.prototype.callEvent = function (evenetName, e) {
+        var fn = this.parse.bind(this.attrs[evenetName]);
+        fn = this.parse(this.attrs[evenetName]);
+        if (fn)
+            fn(this.scope, { $event: e });
+    };
+    sortable.prototype.callSortedEvent = function (evenetName) {
+        var e = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            e[_i - 1] = arguments[_i];
+        }
+        var fn = this.parse.bind(this.attrs[evenetName]);
+        fn = this.parse(this.attrs[evenetName]);
+        if (fn)
+            fn(this.scope, e);
+    };
+    sortable.prototype.swapElement = function (srcIndex, toIndex) {
+        if (srcIndex < 0 || toIndex < 0)
+            return;
+        var from = this.getTr(srcIndex);
+        var to = this.getTr(toIndex);
+        if (srcIndex < toIndex) {
+            from.remove();
+            angular.element(to).after(from);
+        }
+        else {
+            to.remove();
+            angular.element(from).after(to);
+        }
+        this.scope.$apply();
+    };
+    sortable.$inject = ['$scope', '$element', '$attrs', '$parse', '$timeout'];
+    return sortable;
+})();
+app.directive('mosaSortable', function () {
+    return {
+        restrict: 'A',
+        scope: false,
+        controller: sortable,
+        controllerAs: 'sortable',
+        bindToController: true
+    };
+});
+
+},{}],6:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -29389,11 +29671,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],4:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":3}]},{},[2])
+},{"./angular":6}]},{},[4])
 
 
 //# sourceMappingURL=modules.js.map

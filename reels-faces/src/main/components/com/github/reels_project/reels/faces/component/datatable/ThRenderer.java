@@ -21,15 +21,19 @@ public class ThRenderer extends DirectiveRenderer {
 	@Override
 	public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
 		ResponseWriter writer = context.getResponseWriter();
-		writer.endElement("div");
+		writer.endElement("jsf-th");
 //		super.encodeScript(context, component);
 	}
 
 	protected void encodeMarkup(FacesContext context, UIComponent component) throws IOException {
 		ResponseWriter writer = context.getResponseWriter();
 		
-		writer.startElement("div", null);
+		Th th = (Th)component;
+
+		writer.startElement("jsf-th", null);
 		writer.writeAttribute("id", component.getClientId(), null);
-		writer.writeAttribute("class", "jsf-th", null);
+		
+		Boolean fixed = th.getFixed();
+		writer.writeAttribute("fixed", fixed != null ? fixed.toString() : false, null);
 	}
 }

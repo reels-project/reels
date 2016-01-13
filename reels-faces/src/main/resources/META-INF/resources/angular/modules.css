@@ -6834,76 +6834,89 @@
 .depth-5 {
   box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.14), 0px 16px 24px 2px rgba(0, 0, 0, 0.098), 0px 6px 30px 5px rgba(0, 0, 0, 0.084); }
 
-.noz-datatable {
+mosa-datatable {
   width: 100%;
   display: flex;
   flex-direction: column;
   flex-grow: 1; }
-  .noz-datatable .datatable-container .data-table {
+  mosa-datatable .datatable-container .mosa-table {
     border: none;
     border-collapse: collapse;
     box-sizing: border-box; }
-    .noz-datatable .datatable-container .data-table .checkbox-delete {
+    mosa-datatable .datatable-container .mosa-table .checkbox-delete {
       margin: 0 10px; }
-    .noz-datatable .datatable-container .data-table .data-th, .noz-datatable .datatable-container .data-table .data-td {
+    mosa-datatable .datatable-container .mosa-table .mosa-th, mosa-datatable .datatable-container .mosa-table .mosa-td {
       border: none;
       padding: 10px 5px;
       text-align: left;
-      vertical-align: middle;
-      justify-content: center; }
-    .noz-datatable .datatable-container .data-table .data-th-content {
+      vertical-align: middle; }
+    mosa-datatable .datatable-container .mosa-table .mosa-th-content {
       justify-content: center;
       text-align: left;
       vertical-align: middle; }
-    .noz-datatable .datatable-container .data-table .data-th {
+    mosa-datatable .datatable-container .mosa-table .mosa-th {
       height: 54px;
-      cursor: pointer; }
-    .noz-datatable .datatable-container .data-table .data-td {
-      height: 41px; }
-    .noz-datatable .datatable-container .data-table .data-tr {
+      cursor: pointer;
+      font-weight: bold;
+      width: 100px; }
+    mosa-datatable .datatable-container .mosa-table .mosa-td {
+      height: 41px;
+      width: 100px; }
+    mosa-datatable .datatable-container .mosa-table .mosa-tr {
       border-bottom: 1px solid #d0d0d0;
       display: flex;
       flex-direction: row; }
-    .noz-datatable .datatable-container .data-table .data-thead {
+    mosa-datatable .datatable-container .mosa-table .mosa-thead {
       width: 100%; }
-    .noz-datatable .datatable-container .data-table .data-tbody {
-      width: 100%; }
-      .noz-datatable .datatable-container .data-table .data-tbody .data-tr.ng-leave {
+    mosa-datatable .datatable-container .mosa-table .mosa-tbody {
+      width: 100%;
+      position: relative; }
+      mosa-datatable .datatable-container .mosa-table .mosa-tbody .mosa-tr.ng-leave {
         display: none;
         text-align: center; }
-      .noz-datatable .datatable-container .data-table .data-tbody .tr-hovered {
+      mosa-datatable .datatable-container .mosa-table .mosa-tbody .tr-hovered {
         background-color: rgba(0, 0, 0, 0.1);
         transition: background-color 0.2s ease, box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
-      .noz-datatable .datatable-container .data-table .data-tbody .tr-selected {
+      mosa-datatable .datatable-container .mosa-table .mosa-tbody .tr-selected {
         background-color: rgba(0, 0, 0, 0.2);
         transition: background-color 0.2s ease, box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
-      .noz-datatable .datatable-container .data-table .data-tbody .td-summary, .noz-datatable .datatable-container .data-table .data-tbody .td-template {
+      mosa-datatable .datatable-container .mosa-table .mosa-tbody .td-summary, mosa-datatable .datatable-container .mosa-table .mosa-tbody .td-template {
         vertical-align: middle;
         word-break: break-all; }
-      .noz-datatable .datatable-container .data-table .data-tbody .td-detail {
+      mosa-datatable .datatable-container .mosa-table .mosa-tbody .td-detail {
         background-color: rgba(0, 0, 0, 0.04);
         font-size: 16px !important;
         padding: 10px 0; }
-  .noz-datatable .datatable-container .datatable-fixed-body-container {
+  mosa-datatable .datatable-container .datatable-fixed-body-container {
     overflow-y: hidden; }
-  .noz-datatable .datatable-container .datatable-flow-body-container {
+  mosa-datatable .datatable-container .datatable-flow-body-container {
     overflow-y: auto;
     overflow-x: hidden; }
-  .noz-datatable .datatable-container .datatable-flow {
+  mosa-datatable .datatable-container .datatable-flow {
     overflow-x: auto; }
-  .noz-datatable .datatable-container .datatable-fixed {
+  mosa-datatable .datatable-container .datatable-fixed {
     border-right: 1px solid #d0d0d0; }
-  .noz-datatable .datatable-container .icon-fixed, .noz-datatable .datatable-container .icon-sort {
+  mosa-datatable .datatable-container .icon-fixed, mosa-datatable .datatable-container .icon-sort {
     color: #1265A7; }
-  .noz-datatable .datatable-container .icon-fixed {
+  mosa-datatable .datatable-container .icon-fixed {
     transform: rotate(-45deg); }
-  .noz-datatable .datatable-container .btn-option {
+  mosa-datatable .datatable-container .btn-option {
     padding: 3px 12px;
     margin: -5px 0; }
-  .noz-datatable .datatable-container .td-edit {
+  mosa-datatable .datatable-container .td-edit {
     width: 65px; }
-  .noz-datatable .datatable-container .td-delete {
+  mosa-datatable .datatable-container .td-delete {
     width: 65px; }
+
+.sortable-drag-src {
+  opacity: 0; }
+
+.sortable-drag-ghost {
+  position: absolute;
+  z-index: 100;
+  pointer-events: none;
+  background: #fff;
+  opacity: 0.8; }
 
 .md-black {
   background-color: rgba(0, 0, 0, 0.54); }

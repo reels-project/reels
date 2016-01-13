@@ -79,6 +79,12 @@ class Datatable {
         // this.bindEvents()
         // // TODO columnsの変更とか監視して幅設定しないとダメな気がする
         // this.setSizeBodyContainer()
+
+        this.scope.$on('fixedColumn', (e, fixed) => {
+         console.log('fixedColumn!!')
+            console.log(e)
+            console.log(fixed)
+        })
     }
 
     getElementsByClass(classVal: string): ng.IRootElementService {
@@ -266,26 +272,33 @@ class Datatable {
 
 app.filter('datatableFixedFilter', FixedFilter);
 
-app.directive('nozDatatable', () => {
+app.directive('mosaDatatable', () => {
     var iconClass = "glyphicon"
     var fixedIcon = iconClass + " glyphicon-pushpin"
 
     var datatableTmplate = `
     <div layout="row"
          flex
+         ng-cloak
          class="datatable-container">
+
          <div>
-           <noz-table>
-           </noz-table>
+           <mosa-table>
+             <mosa-thead>
+             </mosa-thead>
+             <mosa-tbody>
+             </mosa-tbody>
+           </mosa-table>
          </div>
-         <noz-table flex>
+
+         <mosa-table class="datatable-flow" flex>
            <div ng-transclude layout="column" flex></div>
-         </noz-table>
+         </mosa-table>
     </div>`
 
     return {
         template: datatableTmplate,
-        restrict: 'EAC',
+        restrict: 'EA',
         scope: {},
         controller: Datatable,
         controllerAs: 'datatable',
@@ -307,12 +320,14 @@ class Table {
         this.scope.$on('sort', () => {
             console.log('sort')
         })
+
+
     }
 }
-app.directive('nozTable', () => {
+app.directive('mosaTable', () => {
     return {
-        template: '<div class="data-table" ng-transclude layout="column" flex></div>',
-        restrict: 'EAC',
+        template: '<div class="mosa-table" ng-transclude layout="column" flex></div>',
+        restrict: 'EA',
         scope: {},
         controller: Table,
         controllerAs: 'table',
@@ -330,10 +345,10 @@ class Thead {
         private timeout: ng.ITimeoutService) {
     }
 }
-app.directive('nozThead', () => {
+app.directive('mosaThead', () => {
     return {
-        template: '<div class="data-thead" ng-transclude></div>',
-        restrict: 'EAC',
+        template: '<div class="mosa-thead" ng-transclude></div>',
+        restrict: 'EA',
         scope: {},
         controller: Thead,
         controllerAs: 'thead',
@@ -351,12 +366,12 @@ class Tbody {
         private timeout: ng.ITimeoutService) {
     }
 }
-app.directive('nozTbody', () => {
+app.directive('mosaTbody', () => {
     return {
         template: `<div layout="column" flex class="datatable-flow-body-container">
-                     <div class="data-tbody" ng-transclude></div>
+                     <div class="mosa-tbody" ng-transclude></div>
                    </div>`,
-        restrict: 'EAC',
+        restrict: 'EA',
         scope: {},
         controller: Tbody,
         controllerAs: 'tbody',
@@ -374,10 +389,10 @@ class Tr {
         private timeout: ng.ITimeoutService) {
     }
 }
-app.directive('nozTr', () => {
+app.directive('mosaTr', () => {
     return {
-        template: '<div class="data-tr" ng-transclude></div>',
-        restrict: 'EAC',
+        template: '<div class="mosa-tr" ng-transclude></div>',
+        restrict: 'EA',
         scope: {},
         controller: Tr,
         controllerAs: 'tr',
@@ -389,38 +404,44 @@ app.directive('nozTr', () => {
 
 
 class Th {
-    private active: boolean
+    private fixed: boolean
 
     static $inject = ['$scope', '$element', '$timeout']
     constructor(
         private scope: ng.IScope,
         private element: ng.IRootElementService,
         private timeout: ng.ITimeoutService) {
+        // console.log(this.fixed)
+
+        // 初期列固定
+        if (this.fixed) {
+            this.fixedColumn(this.fixed)
+        }
     }
 
     sort() {
         this.scope.$emit('sort')
     }
 
-    getColor(): string {
-        var color = this.active ? 'red' : 'black'
-        return color
+    // 列固定状態変更通知
+    fixedColumn(fixed: boolean) {
+        this.scope.$emit('fixedColumn', fixed)
     }
 }
-app.directive('nozTh', () => {
+app.directive('mosaTh', () => {
     return {
-        template: `<div class="data-th" layout="row" ng-click="th.sort()">
-                     <div class="data-th-content" layout="column" ng-transclude>
+        template: `<div class="mosa-th" layout="row" ng-click="th.sort()">
+                     <div class="mosa-th-content" layout="column" ng-transclude>
                      </div>
                    </div>`,
-        restrict: 'EAC',
+        restrict: 'EA',
         scope: {},
         controller: Th,
         controllerAs: 'th',
         transclude: true,
         replace: true,
         bindToController: {
-            active: '='
+            fixed: '='
         }
     }
 })
@@ -434,10 +455,10 @@ class Td {
         private timeout: ng.ITimeoutService) {
     }
 }
-app.directive('nozTd', () => {
+app.directive('mosaTd', () => {
     return {
-        template: '<div class="data-td" ng-transclude></div>',
-        restrict: 'EAC',
+        template: '<div class="mosa-td" ng-transclude></div>',
+        restrict: 'EA',
         scope: {},
         controller: Td,
         controllerAs: 'td',

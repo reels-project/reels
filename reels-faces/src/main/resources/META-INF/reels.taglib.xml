@@ -158,10 +158,6 @@
     </attribute>
   </tag>
   
-  <composite-library-name>compo</composite-library-name>
-  <!-- component -->
-  <composite-library-name>component</composite-library-name>
-  
   <!-- angularJs contianer (compiler) -->
   <tag>
     <tag-name>ngContainer</tag-name>
@@ -186,6 +182,15 @@
   <tag>
     <tag-name>tbody</tag-name>
     <source>./resources/angular/datatable/tbody.xhtml</source>
+    <attribute>
+      <name>value</name>
+    </attribute>
+    <attribute>
+      <name>var</name>
+    </attribute>
+    <attribute>
+      <name>sortable</name>
+    </attribute>
   </tag>
   <tag>
     <tag-name>tr</tag-name>
@@ -194,6 +199,9 @@
   <tag>
     <tag-name>th</tag-name>
     <source>./resources/angular/datatable/th.xhtml</source>
+    <attribute>
+      <name>fixed</name>
+    </attribute>
   </tag>
   <tag>
     <tag-name>td</tag-name>
@@ -231,6 +239,13 @@
     <tag-name>convertChartModel</tag-name>
     <converter>
       <converter-id>com.github.reels_project.reels.faces.model.chart.ChartModelConverter</converter-id>
+    </converter>
+  </tag>
+  
+  <tag>
+    <tag-name>convertArrayList</tag-name>
+    <converter>
+      <converter-id>com.github.reels_project.reels.faces.model.datatable.ArrayListConverter</converter-id>
     </converter>
   </tag>
 </facelet-taglib>

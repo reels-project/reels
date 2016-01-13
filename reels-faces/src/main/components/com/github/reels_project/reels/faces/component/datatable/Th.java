@@ -9,6 +9,19 @@ import com.github.reels_project.reels.faces.component.main.ComponentDefines;
 //@FacesComponent("com.github.reels_project.reels.faces.component.Th")
 @FacesComponent(tagName = "th" , createTag = true)
 public class Th extends UIInput{
+	
+	public Boolean getFixed() {
+		return (Boolean)getStateHelper().eval("fixed", null);
+	}
+	
+	public Object getFixed2() {
+		return getStateHelper().eval("fixed", null);
+	}
+
+	public void setFixed(Object value) {
+		getStateHelper().put("fixed", value);
+	}
+	
 	public Th(){
 		setRendererType(ComponentDefines.DATATABLE_TH_RENDERER);
 	}
